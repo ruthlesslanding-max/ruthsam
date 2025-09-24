@@ -30,25 +30,16 @@
   <!-- End Meta Pixel Code -->
 </head>
 
-  <style>
+<style>
  :root{
-  --notice:#33c4ff; /* distinct notice color */
   --bg1:#0a0a0f;
-  --bg2:#1a1a2e;
-  --neon:#ff385e; /* ruthless crimson */
-  --sun:#ffc857;  /* golden edge */
+  --bg2:#1a0f0f;
+  --crimson:#ff0033;
+  --gold:#ffcc33;
   --text:#fdfdfd;
   --muted:#b0b0b0;
+  --notice:#33c4ff; /* distinct notice color */
 }
-
-.notice{
-  font-weight:700;
-  margin-bottom:16px;
-  font-size:clamp(14px,4vw,20px);
-  color:var(--notice);
-  text-shadow:0 0 10px rgba(51,196,255,0.6);
-}
-
 
 *{box-sizing:border-box}
 html,body{
@@ -60,11 +51,10 @@ html,body{
   overflow-x:hidden;
 }
 
-/* glowing animated background */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;
-  background:radial-gradient(600px at 50% 70%,rgba(255,56,94,.25),transparent 70%),
-             radial-gradient(800px at 80% 20%,rgba(255,200,87,.18),transparent 80%);
+  background:radial-gradient(600px at 50% 70%,rgba(255,0,51,.25),transparent 70%),
+             radial-gradient(800px at 80% 20%,rgba(255,204,51,.18),transparent 80%);
   animation:glow 6s ease-in-out infinite alternate;
 }
 @keyframes glow{from{opacity:.7} to{opacity:.4}}
@@ -73,11 +63,11 @@ body::before{
 .card{
   width:100%;
   max-width:800px;
-  background:rgba(20,20,30,0.85);
-  border:1px solid rgba(255,56,94,.3);
+  background:rgba(15,10,10,0.85);
+  border:1px solid rgba(255,0,51,.3);
   border-radius:24px;
   padding:28px 22px;
-  box-shadow:0 0 40px rgba(255,56,94,.15),0 0 80px rgba(255,200,87,.15);
+  box-shadow:0 0 40px rgba(255,0,51,.15),0 0 80px rgba(255,204,51,.15);
   text-align:center;
 }
 
@@ -86,15 +76,15 @@ body::before{
 }
 .logo img{
   width:100%;border-radius:18px;object-fit:cover;
-  border:2px solid var(--neon);
-  box-shadow:0 0 25px rgba(255,56,94,.5);
+  border:2px solid var(--crimson);
+  box-shadow:0 0 25px rgba(255,0,51,.5);
 }
 
 h1{
   margin:10px 0;
   font-size:clamp(28px,6vw,52px);
   font-weight:900;
-  background:linear-gradient(90deg,var(--neon),var(--sun));
+  background:linear-gradient(90deg,var(--crimson),var(--gold));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
@@ -105,13 +95,11 @@ h1{
 }
 
 .notice{
-  background:linear-gradient(90deg,var(--neon),var(--sun));
-  color:#000;
-  font-weight:900;
-  padding:10px 14px;
-  border-radius:12px;
-  margin:16px 0;
-  font-size:clamp(14px,3.5vw,18px);
+  font-weight:700;
+  margin-bottom:16px;
+  font-size:clamp(14px,4vw,20px);
+  color:var(--notice);
+  text-shadow:0 0 10px rgba(51,196,255,0.6);
 }
 
 .cta{
@@ -122,17 +110,17 @@ h1{
   font-weight:900;
   font-size:clamp(18px,4.5vw,24px);
   color:#000;
-  background:linear-gradient(90deg,var(--sun),var(--neon));
-  box-shadow:0 0 25px rgba(255,56,94,.7),0 0 55px rgba(255,200,87,.5);
+  background:linear-gradient(90deg,var(--crimson),var(--gold));
+  box-shadow:0 0 25px rgba(255,0,51,.7),0 0 55px rgba(255,204,51,.5);
   animation:pulse 2s infinite;
   transition:transform .2s;
 }
 .cta:hover{transform:scale(1.15)}
 
 @keyframes pulse{
-  0%{transform:scale(1); box-shadow:0 0 25px rgba(255,56,94,.7),0 0 55px rgba(255,200,87,.5);}
-  50%{transform:scale(1.08); box-shadow:0 0 45px rgba(255,56,94,.9),0 0 80px rgba(255,200,87,.7);}
-  100%{transform:scale(1); box-shadow:0 0 25px rgba(255,56,94,.7),0 0 55px rgba(255,200,87,.5);}
+  0%{transform:scale(1); box-shadow:0 0 25px rgba(255,0,51,.7),0 0 55px rgba(255,204,51,.5);}
+  50%{transform:scale(1.08); box-shadow:0 0 45px rgba(255,0,51,.9),0 0 80px rgba(255,204,51,.7);}
+  100%{transform:scale(1); box-shadow:0 0 25px rgba(255,0,51,.7),0 0 55px rgba(255,204,51,.5);}
 }
 
 .bullets{
@@ -142,25 +130,24 @@ h1{
 }
 .bullet{
   background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,56,94,.2);
+  border:1px solid rgba(255,0,51,.2);
   border-radius:16px;
   padding:12px 14px;
   display:flex;align-items:center;gap:10px;
   text-align:left;
   font-size:clamp(13px,3.5vw,18px);
 }
-.bullet b{color:var(--neon)}
+.bullet b{color:var(--gold)}
 
 .footer{margin-top:24px;color:#888;font-size:12px;text-align:center}
 
-/* ✅ Mobile tweaks */
 @media(max-width:480px){
   .card{padding:22px 16px}
   .cta{width:100%;padding:16px 0}
   .bullets{gap:10px}
 }
   </style>
-</head>
+
 <body>
   <main class="wrap">
     <section class="card">
@@ -188,6 +175,5 @@ h1{
   <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 </body>
 </html>
-
 
 
