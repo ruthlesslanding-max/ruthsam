@@ -32,6 +32,7 @@
 
   <style>
  :root{
+  --notice:#33c4ff; /* distinct notice color */
   --bg1:#0a0a0f;
   --bg2:#1a1a2e;
   --neon:#ff385e; /* ruthless crimson */
@@ -39,6 +40,15 @@
   --text:#fdfdfd;
   --muted:#b0b0b0;
 }
+
+.notice{
+  font-weight:700;
+  margin-bottom:16px;
+  font-size:clamp(14px,4vw,20px);
+  color:var(--notice);
+  text-shadow:0 0 10px rgba(51,196,255,0.6);
+}
+
 
 *{box-sizing:border-box}
 html,body{
@@ -178,5 +188,6 @@ h1{
   <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 </body>
 </html>
+
 
 
