@@ -16,46 +16,54 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-
+  
   fbq('init', '272752062229501');
   fbq('track', 'PageView');
-
-  fbq('track', 'Subscribe', {
-    value: 60,
-    currency: 'PKR'
-  });
 </script>
+<noscript>
+  <img height="1" width="1" style="display:none" 
+       src="https://www.facebook.com/tr?id=272752062229501&ev=PageView&noscript=1"/>
+</noscript>
 <!-- End Meta Pixel Code -->
 
-  <!-- Conversions API via Cloudflare Worker -->
-  <script>
-    // Your Cloudflare Worker URL
-    const WORKER_URL = 'https://ruthpo.ruthlesslanding.workers.dev';
-    
-    async function sendToConversionsAPI(eventName, eventData) {
-      try {
-        await fetch(WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event_name: eventName,
-            pixel_id: '272752062229501',
-            custom_data: eventData
-          })
-        });
-      } catch (error) {
-        console.log('Conversions API optional');
-      }
-    }
-
-    function trackEvent(eventName, eventData) {
-      // 1. Facebook Pixel
-      fbq('track', eventName, eventData);
+<!-- Conversions API via Cloudflare Worker -->
+<script>
+  // Your Cloudflare Worker URL
+  const WORKER_URL = 'https://ruthpo.ruthlesslanding.workers.dev';
+  
+  async function sendToConversionsAPI(eventName, eventData) {
+    try {
+      console.log(`📤 Sending ${eventName} to Conversions API...`);
+      const response = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: eventName,
+          pixel_id: '272752062229501',
+          custom_data: eventData,
+          event_source_url: window.location.href
+        })
+      });
       
-      // 2. Conversions API
-      sendToConversionsAPI(eventName, eventData);
+      const result = await response.json();
+      console.log(`✅ Conversions API: ${eventName} sent successfully`);
+      return result;
+      
+    } catch (error) {
+      console.log(`⚠️ Conversions API optional (${error.message})`);
     }
-  </script>
+  }
+
+  function trackEvent(eventName, eventData) {
+    console.log(`🎯 Tracking: ${eventName}`, eventData);
+    
+    // 1. Facebook Pixel (client-side)
+    fbq('track', eventName, eventData);
+    
+    // 2. Conversions API (server-side)
+    sendToConversionsAPI(eventName, eventData);
+  }
+</script>
 
 <style>
 :root{
@@ -262,4 +270,5 @@ h1{
 </script>
 </body>
 </html>
+
 
