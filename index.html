@@ -23,45 +23,6 @@ src="https://www.facebook.com/tr?id=2652701605103621&ev=PageView&noscript=1"
 /></noscript> 
 <!-- End Meta Pixel Code -->
 
-<!-- Conversions API via Cloudflare Worker -->
-<script>
-  // Your Cloudflare Worker URL
-  const WORKER_URL = 'https://ruthpo.ruthlesslanding.workers.dev';
-  
-  async function sendToConversionsAPI(eventName, eventData) {
-    try {
-      console.log(`📤 Sending ${eventName} to Conversions API...`);
-      const response = await fetch(WORKER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_name: eventName,
-          pixel_id: '272752062229501',
-          custom_data: eventData,
-          event_source_url: window.location.href
-        })
-      });
-      
-      const result = await response.json();
-      console.log(`✅ Conversions API: ${eventName} sent successfully`);
-      return result;
-      
-    } catch (error) {
-      console.log(`⚠️ Conversions API optional (${error.message})`);
-    }
-  }
-
-  function trackEvent(eventName, eventData) {
-    console.log(`🎯 Tracking: ${eventName}`, eventData);
-    
-    // 1. Facebook Pixel (client-side)
-    fbq('track', eventName, eventData);
-    
-    // 2. Conversions API (server-side)
-    sendToConversionsAPI(eventName, eventData);
-  }
-</script>
-
 <style>
 :root{
   --bg1:#0a0a0f;
@@ -236,16 +197,16 @@ h1{
 
       <div style="margin:20px 0">
         <!-- Telegram Button - Track as StartTrial -->
-        <a class="cta" href="https://t.me/+GxpjZk8U6XRiZjM8" target="_blank" 
-           onclick="trackEvent('Telegram Subscribe', {currency: 'USD', value: 0})">
+        <a class="cta" href="https://t.me/+GxpjZk8U6XRiZjM8"
+            onclick="fbq('track', 'Lead'); setTimeout(function(){ window.location.href='https://t.me/+GxpjZk8U6XRiZjM8'; }, 400); return false;">
           🔪 Join Telegram Now
         </a>
 
         <div class="or-text">OR</div>
 
         <!-- WhatsApp Button - Track as Subscribe -->
-        <a class="cta-whatsapp" href="https://whatsapp.com/channel/0029VbCKkKQ0bIdomIHXXF2Z" target="_blank"
-           onclick="trackEvent('Whatsapp Subscribe', {value: selectedPlan.price, currency: 'USD'})">
+        <a class="cta-whatsapp" href="https://whatsapp.com/channel/0029VbCKkKQ0bIdomIHXXF2Z" 
+           onclick="fbq('track', 'Lead'); setTimeout(function(){ window.location.href='https://whatsapp.com/channel/0029VbCKkKQ0bIdomIHXXF2Z'; }, 400); return false;">
           💬 Join WhatsApp Channel
         </a>
     </div>
@@ -267,6 +228,7 @@ h1{
 </script>
 </body>
 </html>
+
 
 
 
